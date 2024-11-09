@@ -1,0 +1,25 @@
+package com.example.notebookmvvm.ViewModel
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.notebookmvvm.Model.Note
+import com.example.notebookmvvm.Repository.NoteRepository
+import kotlinx.coroutines.launch
+
+class NoteViewModel(app:Application,private val noteRepository: NoteRepository):AndroidViewModel(app) {
+
+    fun addNote(note: Note)=viewModelScope.launch {
+        noteRepository.insertNote(note)
+    }
+    fun updateNote(note: Note)=viewModelScope.launch {
+        noteRepository.updateNote(note)
+    }
+    fun deleteNote(note: Note)=viewModelScope.launch {
+        noteRepository.deleteNote(note)
+    }
+    fun searchNote(query:String?)=noteRepository.searchNote(query)
+
+    fun getAllNotes()=noteRepository.getAllNotes()
+
+}
